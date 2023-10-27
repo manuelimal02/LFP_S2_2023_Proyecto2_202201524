@@ -22,13 +22,22 @@ def contarsi_clave(lista_clave, lista_registro, clave, valor):
             contador += 1
     return contador
 
-def datos_consola(lista_clave, lista_registro):
+def datos_consola1(lista_clave, lista_registro):
     texto_imprimir=""
-    encabezado = " - ".join(lista_clave)
+    texto_imprimir+="Registros Leídos: "+"\n"
+    encabezado = " || ".join(lista_clave)
     texto_imprimir += encabezado + "\n"
     for registro in lista_registro:
-        texto_registro = " - ".join(map(str, registro))
-        texto_imprimir += texto_registro + "\n"
+        texto_registro = " || ".join(map(str, registro))
+        texto_imprimir += texto_registro
+    return texto_imprimir
+
+def datos_consola(lista_clave, lista_registro):
+    texto_imprimir=""
+    texto_imprimir+="Registros Leídos: "+"\n"
+    texto_imprimir+=str(lista_clave)+"\n"
+    for registro in lista_registro:
+        texto_imprimir+=str(registro)+"\n"
     return texto_imprimir
 
 def sumar_clave(lista_clave, lista_registro, campo):
@@ -121,7 +130,7 @@ class analizador_s:
     def analizador_sintactico(self, lista_lexemas):
         while lista_lexemas:
             lexema = lista_lexemas.pop(0)
-            
+            # Si se encuentra el lexema "Claves", se llena la lista_clave.
             if lexema.lexema == 'Claves':
                 igual = lista_lexemas.pop(0)
                 if igual.lexema == '=':
@@ -134,31 +143,27 @@ class analizador_s:
                             elif lex.lexema == ',':
                                 continue
                             elif lex.lexema == ']':
-                                #print("Análisis Clave Completado")
                                 break
                             else:
                                 self.lista_clave.append(lex.lexema)
                     else:
-                        print("Error sintáctico en la declaración de claves")
-                        self.lista_error_sintactico.append(Error(igual.lexema,"SINTÁCTICO", igual.fila, igual.columna))
+                        self.lista_error_sintactico.append(Error("Clave","SINTÁCTICO", lexema.fila, lexema.columna))
+                        self.lista_error_sintactico.append(Error("=","SINTÁCTICO", igual.fila, igual.columna))
+                        self.lista_error_sintactico.append(Error(corchete_izq.lexema,"SINTÁCTICO", corchete_izq.fila, corchete_izq.columna))
                         while lista_lexemas:
                             lex = lista_lexemas.pop(0)
                             self.lista_error_sintactico.append(Error(lex.lexema, "SINTÁCTICO",lex.fila, lex.columna))
                             if lex.lexema == ']':
-                                print("Final de la declaración de claves")
                                 break
                 else:
-                    print("Error sintáctico en la declaración de claves")
+                    self.lista_error_sintactico.append(Error("Clave","SINTÁCTICO", lexema.fila, igual.columna))
                     self.lista_error_sintactico.append(Error(igual.lexema,"SINTÁCTICO", igual.fila, igual.columna))
                     while lista_lexemas:
                         lex = lista_lexemas.pop(0)
                         self.lista_error_sintactico.append(Error(lex.lexema, "SINTÁCTICO",lex.fila, lex.columna))
                         if lex.lexema == ']':
-                            print("Final de la declaración de claves")
                             break
-
-
-            
+            # Si se encuentra el lexema "Registros", se llena la lista_registro.
             if lexema.lexema == 'Registros':
                 igual = lista_lexemas.pop(0)
                 if igual.lexema == '=':
@@ -167,7 +172,6 @@ class analizador_s:
                         while lista_lexemas:
                             lex = lista_lexemas.pop(0)
                             if lex.lexema == ']':
-                                #print("Análisis Registro Completado")
                                 break
                             elif lex.lexema == '{':
                                 nuevo_registro = []
@@ -182,7 +186,38 @@ class analizador_s:
                                         break 
                                     else:
                                         nuevo_registro.append(lex.lexema)
-
+                    else:
+                        self.lista_error_sintactico.append(Error("Registros","SINTÁCTICO", lexema.fila, lexema.columna))
+                        self.lista_error_sintactico.append(Error("=","SINTÁCTICO", igual.fila, igual.columna))
+                        self.lista_error_sintactico.append(Error(corchete_izq.lexema,"SINTÁCTICO", corchete_izq.fila, corchete_izq.columna))
+                        while lista_lexemas:
+                            lex = lista_lexemas.pop(0)
+                            self.lista_error_sintactico.append(Error(lex.lexema, "SINTÁCTICO",lex.fila, lex.columna))
+                            if lex.lexema == ']':
+                                break
+                else:
+                    self.lista_error_sintactico.append(Error("Registros","SINTÁCTICO", lexema.fila, lexema.columna))
+                    self.lista_error_sintactico.append(Error(igual.lexema,"SINTÁCTICO", igual.fila, igual.columna))
+                    while lista_lexemas:
+                        lex = lista_lexemas.pop(0)
+                        self.lista_error_sintactico.append(Error(lex.lexema, "SINTÁCTICO",lex.fila, lex.columna))
+                        if lex.lexema == ']':
+                            break
+            # Si se encuentra el lexema "imprimir", se guarda el texto a imprimir.
+            if lexema.lexema == 'imprimir':
+                lexema_iz = lista_lexemas.pop(0)
+                if lexema_iz.lexema == '(':
+                    comillas = lista_lexemas.pop(0)
+                    if comillas.lexema == '"':
+                        texto = lista_lexemas.pop(0)
+                        comillas = lista_lexemas.pop(0)
+                        if comillas.lexema == '"':
+                            parentesis = lista_lexemas.pop(0)
+                            if parentesis.lexema == ')':
+                                punto_coma = lista_lexemas.pop(0)
+                                if punto_coma.lexema == ';':
+                                    self.texto_imprimir+=texto.lexema
+            # Si se encuentra el lexema "imprimirln", se guarda el texto a imprimir.
             if lexema.lexema == 'imprimirln':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -196,21 +231,19 @@ class analizador_s:
                             if parentesis.lexema == ')':
                                 punto_coma = lista_lexemas.pop(0)
                                 if punto_coma.lexema == ';':
-                                    #print("Análisis imprimirln Completado")
                                     self.texto_imprimir+=texto.lexema
-
+            # Si se encuentra el lexema "conteo", se llama a la función len().
             if lexema.lexema == 'conteo':
                 self.texto_imprimir+="\n"
-                lexema = lista_lexemas.pop(0)
-                if lexema.lexema == '(':
+                lexema_iz = lista_lexemas.pop(0)
+                if lexema_iz.lexema == '(':
                     parentesis = lista_lexemas.pop(0)
                     if parentesis.lexema == ')':
                         punto_coma = lista_lexemas.pop(0)
                         if punto_coma.lexema == ';':
-                            #print("Análisis Conteo Completado")
                             conteo=len(self.lista_registro)
-                            self.texto_imprimir+=str(conteo)
-
+                            self.texto_imprimir+=f"Cantidad de registros: {str(conteo)}."
+            # Si se encuentra el lexema "datos", se llama a la función datos_consola().
             if lexema.lexema == 'datos':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -219,10 +252,9 @@ class analizador_s:
                     if parentesis.lexema == ')':
                         punto_coma = lista_lexemas.pop(0)
                         if punto_coma.lexema == ';':
-                            #print("Análisis datos Completado")
                             datos=datos_consola(self.lista_clave, self.lista_registro)
                             self.texto_imprimir+=datos
-
+            # Si se encuentra el lexema "promedio", se llama a la función promedio_clave().
             if lexema.lexema == 'promedio':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -240,8 +272,8 @@ class analizador_s:
                                     if promedio is None:
                                         print("No Existe el campo: "+ texto.lexema)
                                     else:
-                                        self.texto_imprimir+=str(promedio)
-
+                                        self.texto_imprimir+=f"El promedio de '{texto.lexema}' es: {str(promedio)}."
+            # Si se encuentra el lexema "contarsi", se llama a la función contarsi_clave().
             if lexema.lexema == 'contarsi':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -262,8 +294,8 @@ class analizador_s:
                                         if contador is None:
                                             print("No Existe el campo: "+ texto.lexema)
                                         else:
-                                            self.texto_imprimir+=str(contador)
-
+                                            self.texto_imprimir+=f"El número '{numero.lexema}' aparece '{str(contador)}' veces en '{texto.lexema}'."
+            # Si se encuentra el lexema "sumar", se llama a la función sumar_clave().
             if lexema.lexema == 'sumar':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -281,8 +313,8 @@ class analizador_s:
                                     if suma is None:
                                         print("No Existe el campo: "+ texto.lexema)
                                     else:
-                                        self.texto_imprimir+=str(suma)
-
+                                        self.texto_imprimir+=f"La suma de '{texto.lexema}' es: {str(suma)}."
+            # Si se encuentra el lexema "max", se llama a la función maximo_clave().
             if lexema.lexema == 'max':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -300,8 +332,8 @@ class analizador_s:
                                     if max is None:
                                         print("No Existe el campo: "+ texto.lexema)
                                     else:
-                                        self.texto_imprimir+=str(max)
-
+                                        self.texto_imprimir+=f"El valor máximo de '{texto.lexema}' es: {str(max)}."
+            # Si se encuentra el lexema "min", se llama a la función minimo_clave().
             if lexema.lexema == 'min':
                 self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
@@ -319,9 +351,10 @@ class analizador_s:
                                     if min is None:
                                         print("No Existe el campo: "+ texto.lexema)
                                     else:
-                                        self.texto_imprimir+=str(min)
-
+                                        self.texto_imprimir+=f"El valor mínimo de '{texto.lexema}' es: {str(min)}."
+            # Si se encuentra el lexema "exporteReporte", se llama a la función exportar_reporte().
             if lexema.lexema == 'exportarReporte':
+                self.texto_imprimir+="\n"
                 lexema = lista_lexemas.pop(0)
                 if lexema.lexema == '(':
                     comillas = lista_lexemas.pop(0)
@@ -333,24 +366,9 @@ class analizador_s:
                             if parentesis.lexema == ')':
                                 punto_coma = lista_lexemas.pop(0)
                                 if punto_coma.lexema == ';':
-                                    print("Análisis reporte Completado")
+                                    self.texto_imprimir+=f"Se ha creado un reporte con el nombre: {texto.lexema}."
                                     exportar_reporte(texto.lexema, self.lista_clave, self.lista_registro)
 
-            if lexema.lexema == 'imprimir':
-                lexema = lista_lexemas.pop(0)
-                if lexema.lexema == '(':
-                    comillas = lista_lexemas.pop(0)
-                    if comillas.lexema == '"':
-                        texto = lista_lexemas.pop(0)
-                        comillas = lista_lexemas.pop(0)
-                        if comillas.lexema == '"':
-                            parentesis = lista_lexemas.pop(0)
-                            if parentesis.lexema == ')':
-                                punto_coma = lista_lexemas.pop(0)
-                                if punto_coma.lexema == ';':
-                                    print("Análisis imprimir Completado")
-                                    self.texto_imprimir+=texto.lexema
-    
     #Función Para Crear El Reporte De Errores Sintácticos
     def reporte_errores_sintacticos(self):
         nombre_archivo = "reportes/Reporte_Errores_Sintácticos.html"
