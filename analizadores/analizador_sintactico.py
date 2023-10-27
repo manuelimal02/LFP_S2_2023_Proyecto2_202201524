@@ -22,16 +22,6 @@ def contarsi_clave(lista_clave, lista_registro, clave, valor):
             contador += 1
     return contador
 
-def datos_consola1(lista_clave, lista_registro):
-    texto_imprimir=""
-    texto_imprimir+="Registros Leídos: "+"\n"
-    encabezado = " || ".join(lista_clave)
-    texto_imprimir += encabezado + "\n"
-    for registro in lista_registro:
-        texto_registro = " || ".join(map(str, registro))
-        texto_imprimir += texto_registro
-    return texto_imprimir
-
 def datos_consola(lista_clave, lista_registro):
     texto_imprimir=""
     texto_imprimir+="Registros Leídos: "+"\n"
@@ -71,6 +61,7 @@ def exportar_reporte(titulo, lista_clave, lista_registro):
     nombre_archivo = "reportes/Reporte_En_Consola.html"
     html = f"""<!DOCTYPE html>
                 <html>
+                <meta charset="UTF-8">
                 <head>
                     <title>Reporte Consola</title>
                     <style>
@@ -270,7 +261,7 @@ class analizador_s:
                                 if punto_coma.lexema == ';':
                                     promedio=promedio_clave(self.lista_clave, self.lista_registro, texto.lexema)
                                     if promedio is None:
-                                        print("No Existe el campo: "+ texto.lexema)
+                                        self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"El promedio de '{texto.lexema}' es: {str(promedio)}."
             # Si se encuentra el lexema "contarsi", se llama a la función contarsi_clave().
@@ -292,7 +283,7 @@ class analizador_s:
                                     if punto_coma.lexema == ';':
                                         contador=contarsi_clave(self.lista_clave, self.lista_registro, texto.lexema, numero.lexema)
                                         if contador is None:
-                                            print("No Existe el campo: "+ texto.lexema)
+                                            self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                         else:
                                             self.texto_imprimir+=f"El número '{numero.lexema}' aparece '{str(contador)}' veces en '{texto.lexema}'."
             # Si se encuentra el lexema "sumar", se llama a la función sumar_clave().
@@ -311,7 +302,7 @@ class analizador_s:
                                 if punto_coma.lexema == ';':
                                     suma=sumar_clave(self.lista_clave, self.lista_registro, texto.lexema)
                                     if suma is None:
-                                        print("No Existe el campo: "+ texto.lexema)
+                                        self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"La suma de '{texto.lexema}' es: {str(suma)}."
             # Si se encuentra el lexema "max", se llama a la función maximo_clave().
@@ -330,7 +321,7 @@ class analizador_s:
                                 if punto_coma.lexema == ';':
                                     max=maximo_clave(self.lista_clave, self.lista_registro, texto.lexema)
                                     if max is None:
-                                        print("No Existe el campo: "+ texto.lexema)
+                                        self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"El valor máximo de '{texto.lexema}' es: {str(max)}."
             # Si se encuentra el lexema "min", se llama a la función minimo_clave().
@@ -349,7 +340,7 @@ class analizador_s:
                                 if punto_coma.lexema == ';':
                                     min=minimo_clave(self.lista_clave, self.lista_registro, texto.lexema)
                                     if min is None:
-                                        print("No Existe el campo: "+ texto.lexema)
+                                        self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"El valor mínimo de '{texto.lexema}' es: {str(min)}."
             # Si se encuentra el lexema "exporteReporte", se llama a la función exportar_reporte().
@@ -393,6 +384,7 @@ class analizador_s:
         tabla_html += "</table>"
         html = f"""<!DOCTYPE html>
                     <html>
+                    <meta charset="UTF-8">
                     <head>
                         <title>Error Sintático</title>
                         <style>

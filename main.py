@@ -176,30 +176,23 @@ class ventana_principal:
             messagebox.showerror("Error", f"Se ha producido un error: {str(e)}")
 
     def analizar(self):
-        #try:
+        try:
             self.archivo_analizado=True
             codigo_fuente = self.areatexto.get(1.0, tk.END)
-
+            #Se Llama Al Analizador Léxico
             analizador_lexico.analizador_lexico(codigo_fuente)
+            #Se crea Una Copia Del La Lista_Lexemas
             lista_lexemas_local=[]
             lista_lexemas_local=analizador_lexico.lista_lexemas.copy()
-
-
-            print("---------------------------------------")
-            for lexema in analizador_lexico.lista_lexemas:
-                print("--")
-                print(lexema.lexema)
-            print("---------------------------------------")
-
+            #Se Llama Al Analizador Sintáctico
             analizador_sintactico.analizador_sintactico(lista_lexemas_local)
-
             self.consola.config(state='normal')
             self.consola.delete(1.0, tk.END)
             self.consola.insert(1.0, analizador_sintactico.texto_imprimir)
             self.consola.config(state='disabled')
             messagebox.showinfo("BizData", "Código Analizado Correctamente.")
-        #except Exception:
-            #messagebox.showerror("ERROR")
+        except Exception as e:
+            messagebox.showerror("Error", f"Se ha producido un error: {str(e)}")
 
 if __name__ == "__main__":
     root = tk.Tk()
