@@ -198,7 +198,7 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 - datos();
 <image src="https://i.ibb.co/HzgpHNk/DATOS.png">
 
-- promedio("");
+- promedio("");c
 <image src="https://i.ibb.co/SXJYtzf/PROMEDIO.png">
 
 - contarsi("", );
@@ -220,62 +220,129 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 
 ## Gramática Independiente Del Contexto
 
-- datos();
+    Claves = ["",""]
+Terminales = {'Claves', Igual, Corchete Izquierdo, Corchete Derecho, Comillas, Coma, Texto}
+No Terminales = {q0, q1, q2, q3}
+Inicio = {q0}
 Producciones:
-q0::= datos q1 Punto Y Coma
-q1::= Paréntesis Derecho - Paréntesis Izquierdo 
+< q0 >::= Claves Igual < q1 >
+< q1 >::= Corchete Izquierdo < q2 > Corchete Derecho
+< q2 >::= Comillas - Texto - Comillas < q3 >
+< q3 >::= Coma < q2 > | e
 
-- promedio("");
+	Registros = [{,"",} {,"",}]
+Terminales = {'Registros', Igual, Corchete Izquierdo, Corchete Derecho, Llave Izquierda, Llave Derecha, Comillas, Coma, Texto}
+No Terminales = {q0, q1, q2, q3, q4}
+Inicio = {q0}
+Producciones:
+< q0 >::= Registros Igual < q1 >
+< q1 >::= Corchete Izquierdo < q2 > Corchete Derecho
+< q2 >::= Llave Izquierda < q3 > Llave Derecha
+< q3 >::= Texto < q4 > | Comillas - Texto - Comillas < q4 >
+< q4 >::= Coma < q3 > | e
+
+	#Comentario
+Terminales = {Numeral, Texto}
+No Terminales = {q0, q1, q2}
+Inicio = {q0}
+Producciones:
+< q0 >::= Numeral < q1 >
+< q1 >::= Texto < q2 > | e
+< q2 >::= Texto < q1 > | e
+
+	'''
+Terminales = {', Texto, '\n'}
+No Terminales = {q0, q1, q2}
+Inicio = {q0}
+Producciones:
+< q0 >::= ''' < q1 > '''
+< q1 >::= Texto < q2 > | \n < q2 > | e
+< q2 >::= Texto < q1 > | \n < q2 > | e
+
+	imprimir("");
+Terminales = {'imprimir', Paréntesis Izquierdo, Paréntesis Derecho, Texto, Comillas, Punto Y Coma}
+No Terminales = {q0, q1, q2}
+Inicio = {q0}
+Producciones:
+< q0 >::= imprimir < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
+
+	implimirln("");
+Terminales = {'imprimirln', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
+No Terminales = {q0, q1, q2}
+Inicio = {q0}
+Producciones:
+< q0 >::= imprimirln < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
+	conteo();
+Terminales = {'conteo', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
+No Terminales = {q0, q1}
+Inicio = {q0}
+Producciones:
+< q0 >::= conteo < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo Paréntesis Derecho
+
+	datos();
+Terminales = {'datos', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
+No Terminales = {q0, q1}
+Inicio = {q0}
+Producciones:
+< q0 >::= datos < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo Paréntesis Derecho
+
+	promedio("");
 Terminales = {'promedio', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-q0::= Promedio q1 Punto Y Coma
-q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
-q2::= Comilla - Texto - Comilla
+< q0 >::= promedio < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
 
-- contarsi("", );
-Terminales = {'contarsi', Paréntesis Izquierdo, Paréntesis Derecho, Coma, Carácter, comilla, Punto Y Coma}
+	contarsi("", );
+Terminales = {'contarsi', Paréntesis Izquierdo, Paréntesis Derecho, Coma, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2, q3}
 Inicio = {q0}
 Producciones:
-q0::= contarsi q1 Punto Y Coma
-q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
-q2::= Comilla - Texto - Comilla q3
-q3::= Coma - Texto | Coma e
+< q0 >::= contarsi < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas < q3 >
+< q3 >::= Coma Texto | Coma e
 
-- sumar("");
+	sumar("");
 Terminales = {'sumar', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-q0::= sumar q1 Punto Y Coma
-q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
-q2::= Comilla - Texto - Comilla
+< q0 >::= sumar < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
 
-- max("");
+	max("");
 Terminales = {'max', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-q0::= max q1 Punto Y Coma
-q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
-q2::= Comilla - Texto - Comilla
+< q0 >::= max < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
 
-- min("");
-Terminales = {'min', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
+	min("");
+Terminales = {'min', Paréntesis Izquierdo, Paréntesis Derecho, carácter, comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-q0::= min q1> Punto Y Coma
-q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
-q2::= Comilla - Texto - Comilla
+< q0 >::= min < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
 
-- exportarReporte("");
-Terminales = {'exportarReporte', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
+	exportarReporte("");
+Terminales = {'exportarReporte', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-q0::= exportarReporte q1 Punto Y Coma
-q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
-q2::= Comilla - Texto - Comilla
+< q0 >::= exportarReporte < q1 > Punto Y Coma
+< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
+< q2 >::= Comillas - Texto - Comillas
