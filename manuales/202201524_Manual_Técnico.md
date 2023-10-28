@@ -5,9 +5,11 @@
 La clase "Lexema" es una estructura de datos en Python diseñada para representar información sobre lexemas en el contexto de análisis léxico. Los lexemas son componentes individuales en el código fuente, como palabras clave, identificadores, operadores, números, etc. Cada objeto de esta clase representa un lexema específico y contiene detalles como su contenido, ubicación en el código fuente y tipo.
 
 
+
 ## error.py
 
 La clase "Error" se utiliza para representar y gestionar errores relacionados con el análisis léxico y sintáctico del programa. Estos errores pueden ocurrir durante la fase de procesamiento del código fuente, lo que dificulta la comprensión y ejecución adecuada del programa. Los objetos de esta clase almacenan información como la descripción del error, su tipo, y su ubicación exacta en el código fuente (fila y columna), lo que facilita la identificación y corrección de errores en el programa.
+
 
 
 ## main.py
@@ -39,6 +41,8 @@ Realiza el análisis léxico y sintáctico del código fuente que se encuentra e
 8. **Inicialización y Ejecución:**
 La última parte del programa crea una instancia de la clase "ventana_principal" y ejecuta la aplicación de GUI con la función root.mainloop().
 
+
+
 ## analizador_léxico.py
 El código se trata de una implementación del analizador léxico de un lenguaje de programación. Este analizador léxico escanea un código fuente y divide el texto en "lexemas", que son unidades de significado en el código. Además, al encontrar errores léxicos, los registra en una lista de errores.
 
@@ -61,6 +65,8 @@ El código se trata de una implementación del analizador léxico de un lenguaje
 
 9. **grafica_arbol_derivación:** Esta función genera un informe en formato DOT, que se usa para crear una representación gráfica de un árbol de derivación. Luego, se utiliza Graphviz (una herramienta para generar gráficos) para convertir el archivo DOT en un archivo PDF que representa el árbol de derivación de los lexemas identificados en el código fuente.
 
+
+
 ## analizador_sintáctico.py
 
 El código se trata de una implementación de un analizador sintáctico diseñado para procesar el código fuente. El código de análisis sintáctico recibe una lista de lexemas (que proviene de un análisis léxico previo).
@@ -82,49 +88,52 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 
 6. **reporte_errores_sintacticos:** Esta función se encarga de generar un informe HTML que muestra los errores sintácticos encontrados durante el análisis.
 
+
+
 ## Expresiones Regulares
 
-    Claves = [" "," "]
+**Claves = [" "," "]**
 ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
-    Registros = [{," ",}{," ",}]
+**Registros = [{," ",}{," ",}]**
 ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
-    #Comentario
+**#Comentario**
 ER: '#' Cr+
 
-    '''Comentario'''
+**'''Comentario'''**
 ER: ' ' ' (Cr | \n )+ ' ' '
 
-    imprimir("");
+**imprimir("");**
 ER: imprimir ( " Cr+ " ) ;
 
-    implimirln("");
+**implimirln("");**
 ER: imprimirln ( " Cr+ " ) ;
 
-    conteo();
+**conteo();**
 ER: conteo (  ) ;
 
-    datos();
+**datos();**
 ER: datos (  ) ;
 
-    promedio("");
+**promedio("");**
 ER: promedio ( " Cr+ " ) ;
 
-    contarsi("", );
+**contarsi("", );**
 ER: contarsi ( " Cr+ " , Cr+ ) ;
 
-    sumar("");
+**sumar("");**
 ER: sumar ( " Cr+ " ) ;
 
-    max("");
+**max("");**
 ER: max ( " Cr+ " ) ;
 
-    min("");
+**min("");**
 ER: min ( " Cr+ " ) ;
 
-    exportarReporte("");
+**exportarReporte("");**
 ER: exportarReporte ( " Cr+ " ) ;
+
 
 
 ## Método Del Árbol
@@ -170,6 +179,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 
     exportarReporte("");
 <image src="https://i.ibb.co/Y3Hrt9Q/EXPORTAR-REPORTE.jpg">
+
 
 
 ## Autómata Finito Determinista
@@ -310,7 +320,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q0 >::= contarsi < q1 > Punto Y Coma
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas < q3 >
-+ < q3 >::= Coma Texto | Coma e
++ < q3 >::= Coma Numero | Coma e
 
 **sumar("");**
 + Terminales = {'sumar', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
