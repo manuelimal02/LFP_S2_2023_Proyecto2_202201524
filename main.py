@@ -179,6 +179,18 @@ class ventana_principal:
         try:
             self.archivo_analizado=True
             codigo_fuente = self.areatexto.get(1.0, tk.END)
+            #Se Vacían Las Listas del Analizador_Lexico
+            analizador_lexico.lista_lexemas.clear()
+            analizador_lexico.lista_errores.clear()
+            analizador_lexico.n_linea = 1
+            analizador_lexico.n_columna = 1
+            #Se Vacían Las Listas del Analizador_Sintactico
+            analizador_sintactico.lista_clave.clear()
+            analizador_sintactico.lista_registro.clear()
+            analizador_sintactico.lista_error_sintactico.clear()
+            analizador_sintactico.texto_imprimir=""
+            #Se Limpia La Caja De Texto
+            self.consola.delete(1.0, tk.END)
             #Se Llama Al Analizador Léxico
             analizador_lexico.analizador_lexico(codigo_fuente)
             #Se crea Una Copia Del La Lista_Lexemas

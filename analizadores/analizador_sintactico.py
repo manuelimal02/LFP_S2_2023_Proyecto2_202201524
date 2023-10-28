@@ -57,6 +57,9 @@ def minimo_clave(lista_clave, lista_registro, clave):
     minimo = min(valores_clave)
     return minimo
 
+import webbrowser
+import os
+
 def exportar_reporte(titulo, lista_clave, lista_registro):
     nombre_archivo = "reportes/Reporte_En_Consola.html"
     html = f"""<!DOCTYPE html>
@@ -67,49 +70,55 @@ def exportar_reporte(titulo, lista_clave, lista_registro):
                     <style>
                         body {{
                             font-family: Courier, monospace;
-                            background-color: #f2f2f2;
+                            background-color: white;
+                            margin: 0;
+                            padding: 0;
                         }}
-                        .tabla-container {{
+                        h1 {{
                             text-align: center;
-                            margin: 20px auto;
+                            color: black;
+                            padding: 10px;
+                        }}
+                        table {{
                             width: 80%;
-                        }}
-                        .tabla-container table {{
-                            width: 100%;
+                            margin: 20px auto;
                             border-collapse: collapse;
+                            background-color: #ecf0f1;
                         }}
-                        .tabla-container th, .tabla-container td {{
-                            padding: 8px 12px;
-                            border: 1px solid #444;
+                        th, td {{
+                            border: 1px solid #3498db;
+                            padding: 10px;
+                            text-align: left;
                         }}
-                        .tabla-container th {{
-                            background-color: #333;
+                        th {{
+                            background-color: #3498db;
                             color: white;
                         }}
-                        .tabla-container tr:nth-child(even) {{
-                            background-color: #f2f2f2;
+                        tr:nth-child(even) {{
+                            background-color: #d5dbdb;
                         }}
-                        .tabla-container tr:nth-child(odd) {{
-                            background-color: #fff;
+                        tr:nth-child(odd) {{
+                            background-color: #ecf0f1;
+                        }}
+                        h3 {{
+                            text-align: center;
+                            margin-top: 20px;
                         }}
                     </style>
                 </head>
                 <body>
-                    <h1 style="text-align:center">{titulo}</h1>
-                    <div class="tabla-container">
-                        <table>
-                            <tr>
-                                {"".join(f"<th>{clave}</th>" for clave in lista_clave)}
-                            </tr>
-                            {"".join("<tr>" + "".join(f"<td>{valor}</td>" for valor in registro) + "</tr>" for registro in lista_registro)}
-                        </table>
-                    </div>
+                    <h1>{titulo}</h1>
+                    <table>
+                        <tr>
+                            {"".join(f"<th>{clave}</th>" for clave in lista_clave)}
+                        </tr>
+                        {"".join("<tr>" + "".join(f"<td>{valor}</td>" for valor in registro) + "</tr>" for registro in lista_registro)}
+                    </table>
                     <h3>Reporte En Consola - Carlos Manuel Lima y Lima - 202201524</h3>
                 </body>
                 </html>"""
-    with open(nombre_archivo, "w") as archivo:
+    with open(nombre_archivo, "w", encoding="utf-8") as archivo:
         archivo.write(html)
-
 
 class analizador_s:
     def __init__(self):
@@ -223,6 +232,14 @@ class analizador_s:
                                 punto_coma = lista_lexemas.pop(0)
                                 if punto_coma.lexema == ';':
                                     self.texto_imprimir+=texto.lexema
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "conteo", se llama a la función len().
             if lexema.lexema == 'conteo':
                 self.texto_imprimir+="\n"
@@ -234,6 +251,10 @@ class analizador_s:
                         if punto_coma.lexema == ';':
                             conteo=len(self.lista_registro)
                             self.texto_imprimir+=f"Cantidad de registros: {str(conteo)}."
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "datos", se llama a la función datos_consola().
             if lexema.lexema == 'datos':
                 self.texto_imprimir+="\n"
@@ -264,6 +285,14 @@ class analizador_s:
                                         self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"El promedio de '{texto.lexema}' es: {str(promedio)}."
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "contarsi", se llama a la función contarsi_clave().
             if lexema.lexema == 'contarsi':
                 self.texto_imprimir+="\n"
@@ -286,6 +315,14 @@ class analizador_s:
                                             self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                         else:
                                             self.texto_imprimir+=f"El número '{numero.lexema}' aparece '{str(contador)}' veces en '{texto.lexema}'."
+                                    else:
+                                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "sumar", se llama a la función sumar_clave().
             if lexema.lexema == 'sumar':
                 self.texto_imprimir+="\n"
@@ -305,6 +342,14 @@ class analizador_s:
                                         self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"La suma de '{texto.lexema}' es: {str(suma)}."
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "max", se llama a la función maximo_clave().
             if lexema.lexema == 'max':
                 self.texto_imprimir+="\n"
@@ -324,6 +369,14 @@ class analizador_s:
                                         self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"El valor máximo de '{texto.lexema}' es: {str(max)}."
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "min", se llama a la función minimo_clave().
             if lexema.lexema == 'min':
                 self.texto_imprimir+="\n"
@@ -343,6 +396,14 @@ class analizador_s:
                                         self.lista_error_sintactico.append(Error(texto.lexema,"SINTÁCTICO", texto.fila, texto.columna))
                                     else:
                                         self.texto_imprimir+=f"El valor mínimo de '{texto.lexema}' es: {str(min)}."
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
             # Si se encuentra el lexema "exporteReporte", se llama a la función exportar_reporte().
             if lexema.lexema == 'exportarReporte':
                 self.texto_imprimir+="\n"
@@ -359,19 +420,74 @@ class analizador_s:
                                 if punto_coma.lexema == ';':
                                     self.texto_imprimir+=f"Se ha creado un reporte con el nombre: {texto.lexema}."
                                     exportar_reporte(texto.lexema, self.lista_clave, self.lista_registro)
-
+                                else:
+                                    self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                            else:
+                                self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                        else:
+                            self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
+                    else:
+                        self.lista_error_sintactico.append(Error(lexema.lexema, "SINTÁCTICO",lexema.fila, lexema.columna))
     #Función Para Crear El Reporte De Errores Sintácticos
     def reporte_errores_sintacticos(self):
-        nombre_archivo = "reportes/Reporte_Errores_Sintácticos.html"
-        tabla_html = """
-        <table>
-            <tr>
-                <th>Token</th>
-                <th>Tipo</th>
-                <th>Fila</th>
-                <th>Columna</th>
-            </tr>
-            """
+        nombre_archivo = "reportes/Reporte_Errores_Sintacticos.html"
+        html = f"""<!DOCTYPE html>
+                    <html>
+                    <meta charset="UTF-8">
+                    <head>
+                        <title>Error Sintáctico</title>
+                        <style>
+                            body {{
+                                font-family: Courier, monospace;
+                                background-color: white;
+                                margin: 0;
+                                padding: 0;
+                            }}
+                            h1 {{
+                                text-align: center;
+                                color: black;
+                                padding: 10px;
+                            }}
+                            table {{
+                                width: 80%;
+                                margin: 20px auto;
+                                border-collapse: collapse;
+                                background-color: #ecf0f1;
+                            }}
+                            th, td {{
+                                border: 1px solid #3498db;
+                                padding: 10px;
+                                text-align: left;
+                            }}
+                            th {{
+                                background-color: #3498db;
+                                color: white;
+                            }}
+                            tr:nth-child(even) {{
+                                background-color: #d5dbdb;
+                            }}
+                            tr:nth-child(odd) {{
+                                background-color: #ecf0f1;
+                            }}
+                            h3 {{
+                                text-align: center;
+                                margin-top: 20px;
+                            }}
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Reporte de Errores Sintácticos</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Tipo</th>
+                                    <th>Fila</th>
+                                    <th>Columna</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+        """
         for error in self.lista_error_sintactico:
             fila_html = f"""
             <tr>
@@ -380,51 +496,13 @@ class analizador_s:
                 <td>{error.fila}</td>
                 <td>{error.columna}</td>
             </tr>"""
-            tabla_html += fila_html
-        tabla_html += "</table>"
-        html = f"""<!DOCTYPE html>
-                    <html>
-                    <meta charset="UTF-8">
-                    <head>
-                        <title>Error Sintático</title>
-                        <style>
-                            body {{
-                                font-family: Courier, monospace;
-                                background-color: #f2f2f2;
-                            }}
-                            .tabla-container {{
-                                text-align: center;
-                                margin: 20px auto;
-                                width: 80%;
-                            }}
-                            .tabla-container table {{
-                                width: 100%;
-                                border-collapse: collapse;
-                            }}
-                            .tabla-container th, .tabla-container td {{
-                                padding: 8px 12px;
-                                border: 1px solid #444;
-                            }}
-                            .tabla-container th {{
-                                background-color: #333;
-                                color: white;
-                            }}
-                            .tabla-container tr:nth-child(even) {{
-                                background-color: #f2f2f2;
-                            }}
-                            .tabla-container tr:nth-child(odd) {{
-                                background-color: #fff;
-                            }}
-                        </style>
-                    </head>
-                    <body>
-                        <h1 style="text-align:center">Reporte De Errores Sintácticos</h1>
-                        <div class="tabla-container">
-                            {tabla_html}
-                        </div>
-                        <h3>Reporte De Errores Sintácticos - Carlos Manuel Lima y Lima - 202201524</h3>
-                    </body>
-                    </html>"""
-        with open(nombre_archivo, "w") as archivo:
+            html += fila_html
+        html += """
+                        </tbody>
+                    </table>
+                    <h3>Reporte de Errores Sintácticos - Carlos Manuel Lima y Lima - 202201524</h3>
+                </body>
+                </html>"""
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             archivo.write(html)
-        webbrowser.open('file://' + os.path.abspath(nombre_archivo)) 
+        webbrowser.open('file://' + os.path.abspath(nombre_archivo))

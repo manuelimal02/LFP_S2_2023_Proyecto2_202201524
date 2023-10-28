@@ -343,138 +343,161 @@ class analizador_l:
     #Función Para Crear El Reporte De Tokens
     def reporte_tokens(self):
         nombre_archivo = "reportes/Reporte_Tokens.html"
-        tabla_html = """
-        <table>
-            <tr>
-                <th>Token</th>
-                <th>Lexema</th>
-                <th>Fila</th>
-                <th>Columna</th>
-            </tr>
-            """
+        html = f"""<!DOCTYPE html>
+                    <html>
+                    <meta charset="UTF-8">
+                    <head>
+                        <title>Reporte Tokens</title>
+                        <style>
+                            body {{
+                                font-family: Courier, monospace;
+                                background-color: white;
+                                margin: 0;
+                                padding: 0;
+                            }}
+                            h1 {{
+                                text-align: center;
+                                color: black;
+                                padding: 10px;
+                            }}
+                            table {{
+                                width: 80%;
+                                margin: 20px auto;
+                                border-collapse: collapse;
+                                background-color: #ecf0f1;
+                            }}
+                            th, td {{
+                                border: 1px solid #3498db;
+                                padding: 10px;
+                                text-align: left;
+                            }}
+                            th {{
+                                background-color: #3498db;
+                                color: white;
+                            }}
+                            tr:nth-child(even) {{
+                                background-color: #d5dbdb;
+                            }}
+                            tr:nth-child(odd) {{
+                                background-color: #ecf0f1;
+                            }}
+                            h3 {{
+                                text-align: center;
+                                margin-top: 20px;
+                            }}
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Reporte de Tokens</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Lexema</th>
+                                    <th>Fila</th>
+                                    <th>Columna</th>
+                                </tr>
+                            </thead>
+                            <tbody>"""
         for lexema in self.lista_lexemas:
-            fila_html = f"""
+            fila = f"""
             <tr>
                 <td>{lexema.tipo}</td>
                 <td>{lexema.lexema}</td>
                 <td>{lexema.fila}</td>
                 <td>{lexema.columna}</td>
             </tr>"""
-            tabla_html += fila_html
-        tabla_html += "</table>"
+            html += fila
+        html += """
+                        </tbody>
+                    </table>
+                    <h3>Reporte de Tokens - Carlos Manuel Lima y Lima - 202201524</h3>
+                </body>
+                </html>"""
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+            archivo.write(html)
+        webbrowser.open('file://' + os.path.abspath(nombre_archivo))
+
+
+    #Función Para Crear El Reporte De Errores Léxicos
+
+    def reporte_errores_lexicos(self):
+        nombre_archivo = "reportes/Reporte_Errores_Lexicos.html"
         html = f"""<!DOCTYPE html>
                     <html>
+                    <meta charset="UTF-8">
                     <head>
-                        <title>Reporte Tokens</title>
+                        <title>Errores Léxicos</title>
                         <style>
                             body {{
                                 font-family: Courier, monospace;
-                                background-color: #f2f2f2;
+                                background-color: white;
+                                margin: 0;
+                                padding: 0;
                             }}
-                            .tabla-container {{
+                            h1 {{
                                 text-align: center;
-                                margin: 20px auto;
+                                color: black;
+                                padding: 10px;
+                            }}
+                            table {{
                                 width: 80%;
-                            }}
-                            .tabla-container table {{
-                                width: 100%;
+                                margin: 20px auto;
                                 border-collapse: collapse;
+                                background-color: #ecf0f1;
                             }}
-                            .tabla-container th, .tabla-container td {{
-                                padding: 8px 12px;
-                                border: 1px solid #444;
+                            th, td {{
+                                border: 1px solid #3498db;
+                                padding: 10px;
+                                text-align: left;
                             }}
-                            .tabla-container th {{
-                                background-color: #333;
+                            th {{
+                                background-color: #3498db;
                                 color: white;
                             }}
-                            .tabla-container tr:nth-child(even) {{
-                                background-color: #f2f2f2;
+                            tr:nth-child(even) {{
+                                background-color: #d5dbdb;
                             }}
-                            .tabla-container tr:nth-child(odd) {{
-                                background-color: #fff;
+                            tr:nth-child(odd) {{
+                                background-color: #ecf0f1;
+                            }}
+                            h3 {{
+                                text-align: center;
+                                margin-top: 20px;
                             }}
                         </style>
                     </head>
                     <body>
-                        <h1 style="text-align:center">Reporte De Tokens</h1>
-                        <div class="tabla-container">
-                            {tabla_html}
-                        </div>
-                        <h3>Reporte De Tokens - Carlos Manuel Lima y Lima - 202201524</h3>
-                    </body>
-                    </html>"""
-        with open(nombre_archivo, "w") as archivo:
-            archivo.write(html)
-        webbrowser.open('file://' + os.path.abspath(nombre_archivo))
-
-    #Función Para Crear El Reporte De Errores Léxicos
-    def reporte_errores_lexicos(self):
-        nombre_archivo = "reportes/Reporte_Errores_Léxicos.html"
-        tabla_html = """
-        <table>
-            <tr>
-                <th>Token</th>
-                <th>Tipo</th>
-                <th>Fila</th>
-                <th>Columna</th>
-            </tr>
-            """
+                        <h1>Reporte de Errores Léxicos</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Tipo</th>
+                                    <th>Fila</th>
+                                    <th>Columna</th>
+                                </tr>
+                            </thead>
+                            <tbody>"""
         for error in self.lista_errores:
-            fila_html = f"""
+            fila = f"""
             <tr>
                 <td>{error.error}</td>
                 <td>{error.tipo}</td>
                 <td>{error.fila}</td>
                 <td>{error.columna}</td>
             </tr>"""
-            tabla_html += fila_html
-        tabla_html += "</table>"
-        html = f"""<!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Error Léxico</title>
-                        <style>
-                            body {{
-                                font-family: Courier, monospace;
-                                background-color: #f2f2f2;
-                            }}
-                            .tabla-container {{
-                                text-align: center;
-                                margin: 20px auto;
-                                width: 80%;
-                            }}
-                            .tabla-container table {{
-                                width: 100%;
-                                border-collapse: collapse;
-                            }}
-                            .tabla-container th, .tabla-container td {{
-                                padding: 8px 12px;
-                                border: 1px solid #444;
-                            }}
-                            .tabla-container th {{
-                                background-color: #333;
-                                color: white;
-                            }}
-                            .tabla-container tr:nth-child(even) {{
-                                background-color: #f2f2f2;
-                            }}
-                            .tabla-container tr:nth-child(odd) {{
-                                background-color: #fff;
-                            }}
-                        </style>
-                    </head>
-                    <body>
-                        <h1 style="text-align:center">Reporte De Errores Léxicos</h1>
-                        <div class="tabla-container">
-                            {tabla_html}
-                        </div>
-                        <h3>Reporte De Errores Léxicos - Carlos Manuel Lima y Lima - 202201524</h3>
-                    </body>
-                    </html>"""
-        with open(nombre_archivo, "w") as archivo:
+            html += fila
+        html += """
+                        </tbody>
+                    </table>
+                    <h3>Reporte de Errores Léxicos - Carlos Manuel Lima y Lima - 202201524</h3>
+                </body>
+                </html>"""
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             archivo.write(html)
         webbrowser.open('file://' + os.path.abspath(nombre_archivo))
+
 
     def grafica_arbol_derivación(self):
         lista_lexema = self.lista_lexemas.copy()
@@ -494,19 +517,43 @@ class analizador_l:
                 texto_g+= """subgraph cluster0"""+str(contador_subgrafo)+"""{label="""+f'"'+nodo_actual+f'"'+""" style="filled" gradientangle="270"\n"""
                 contador_actual=contador_nodo
                 contador_nodo+=1
-                texto_g += """n00"""+str(contador_actual)+"""[fillcolor="violet:darkcyan", style=filled, shape=doublecircle, label="""+f'"'+nodo_actual+f'"'+"""];\n"""
+                texto_g += """n00"""+str(contador_actual)+"""[fillcolor="#d43440", style=filled, shape=doublecircle, label="""+f'"'+nodo_actual+f'"'+"""];\n"""
                 while lista_lexema:
                     lex = lista_lexema[0]
                     if lex.lexema == ';':
-                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="lightskyblue:darkcyan", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
+                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="#65babf", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
                         texto_g += """n00"""+str(contador_actual)+ """--"""+ """n00"""+str(contador_nodo)+""" ;\n"""
                         break
                     if lex.lexema !='"':
-                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="lightskyblue:darkcyan", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
+                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="#65babf", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
                         texto_g += """n00"""+str(contador_actual)+ """--"""+ """n00"""+str(contador_nodo)+""" ;\n"""
                         contador_nodo+=1
                     else:
-                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="lightskyblue:darkcyan", style=filled, shape=circle, label="""+f'"'+"``"+f'"'+"""];\n"""
+                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="#65babf", style=filled, shape=circle, label="""+f'"'+"``"+f'"'+"""];\n"""
+                        texto_g += """n00"""+str(contador_actual)+ """--"""+ """n00"""+str(contador_nodo)+""" ;\n"""
+                        contador_nodo+=1
+                    lista_lexema.pop(0)
+                texto_g += """\n}\n"""
+                contador_subgrafo+=1
+                contador_nodo+=1
+            elif lexema.lexema == "Claves" or lexema.lexema=="Registros":
+                nodo_actual = lexema.lexema
+                texto_g+= """subgraph cluster0"""+str(contador_subgrafo)+"""{label="""+f'"'+nodo_actual+f'"'+""" style="filled" gradientangle="270"\n"""
+                contador_actual=contador_nodo
+                contador_nodo+=1
+                texto_g += """n00"""+str(contador_actual)+"""[fillcolor="#d43440", style=filled, shape=doublecircle, label="""+f'"'+nodo_actual+f'"'+"""];\n"""
+                while lista_lexema:
+                    lex = lista_lexema[0]
+                    if lex.lexema == ']':
+                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="#65babf", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
+                        texto_g += """n00"""+str(contador_actual)+ """--"""+ """n00"""+str(contador_nodo)+""" ;\n"""
+                        break
+                    if lex.lexema =='{' or lex.lexema=='}':
+                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="#085879", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
+                        texto_g += """n00"""+str(contador_actual)+ """--"""+ """n00"""+str(contador_nodo)+""" ;\n"""
+                        contador_nodo+=1
+                    elif lex.lexema !='"':
+                        texto_g += """n00"""+str(contador_nodo)+""" [fillcolor="#65babf", style=filled, shape=circle, label="""+f'"'+str(lex.lexema)+f'"'+"""];\n"""
                         texto_g += """n00"""+str(contador_actual)+ """--"""+ """n00"""+str(contador_nodo)+""" ;\n"""
                         contador_nodo+=1
                     lista_lexema.pop(0)
