@@ -84,136 +84,136 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 
 ## Expresiones Regulares
 
-- Claves = [" "," "]
-    - ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
+    Claves = [" "," "]
+ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
-- Registros = [{," ",}{," ",}]
-    - ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
+    Registros = [{," ",}{," ",}]
+ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
-- #Comentario
-    - ER: '#' Cr+
+    #Comentario
+ER: '#' Cr+
 
-- '''Comentario'''
-    - ER: ' ' ' (Cr | \n )+ ' ' '
+    '''Comentario'''
+ER: ' ' ' (Cr | \n )+ ' ' '
 
-- imprimir("");
-    - ER: imprimir ( " Cr+ " ) ;
+    imprimir("");
+ER: imprimir ( " Cr+ " ) ;
 
-- implimirln("");
-    - ER: imprimirln ( " Cr+ " ) ;
+    implimirln("");
+ER: imprimirln ( " Cr+ " ) ;
 
-- conteo();
-    - ER: conteo (  ) ;
+    conteo();
+ER: conteo (  ) ;
 
-- datos();
-    - ER: datos (  ) ;
+    datos();
+ER: datos (  ) ;
 
-- promedio("");
-    - ER: promedio ( " Cr+ " ) ;
+    promedio("");
+ER: promedio ( " Cr+ " ) ;
 
-- contarsi("", );
-    - ER: contarsi ( " Cr+ " , Cr+ ) ;
+    contarsi("", );
+ER: contarsi ( " Cr+ " , Cr+ ) ;
 
-- sumar("");
-    - ER: sumar ( " Cr+ " ) ;
+    sumar("");
+ER: sumar ( " Cr+ " ) ;
 
-- max("");
-    - ER: max ( " Cr+ " ) ;
+    max("");
+ER: max ( " Cr+ " ) ;
 
-- min("");
-    - ER: min ( " Cr+ " ) ;
+    min("");
+ER: min ( " Cr+ " ) ;
 
-- exportarReporte("");
-    - ER: exportarReporte ( " Cr+ " ) ;
+    exportarReporte("");
+ER: exportarReporte ( " Cr+ " ) ;
 
 
 ## Método Del Árbol
 
-- Claves = [" "," "]
+    Claves = [" "," "]
 <image src="https://i.ibb.co/m6fwWLP/CLAVES.png">
 
-- Registros = [{," ",}{," ",}]
+    Registros = [{," ",}{," ",}]
 <image src="https://i.ibb.co/yPDB3bQ/REGISTROS.png">
 
-- #Comentario
+    #Comentario
 <image src="https://i.ibb.co/gSc9Vvz/COMENTARIO-NORMAL.png">
 
-- '''Comentario'''
+    '''Comentario'''
 <image src="https://i.ibb.co/VwmGhtv/COMENATRIO-MULTI.png">
 
-- imprimir("");
+    imprimir("");
 <image src="https://i.ibb.co/XLhG3PR/IMPRIMIR.jpg">
 
-- implimirln("");
+    implimirln("");
 <image src="https://i.ibb.co/VMVPR3W/IMPRIMIRLN.jpg">
 
-- conteo();
+    conteo();
 <image src="https://i.ibb.co/4srhKC2/CONTEO.png">
 
-- datos();
+    datos();
 <image src="https://i.ibb.co/xYny2mP/DATOS.png">
 
-- promedio("");
+    promedio("");
 <image src="https://i.ibb.co/h1zpxyP/PROMEDIO.jpg">
 
-- contarsi("", );
+    contarsi("", );
 <image src="https://i.ibb.co/k9mGRZx/CONTARSI.png">
 
-- sumar("");
+    sumar("");
 <image src="https://i.ibb.co/gvQf4dn/SUMA.jpg">
 
-- max("");
+    max("");
 <image src="https://i.ibb.co/6014ZR3/MAX.jpg">
 
-- min("");
+    min("");
 <image src="https://i.ibb.co/QKJfmR1/MIN.jpg">
 
-- exportarReporte("");
+    exportarReporte("");
 <image src="https://i.ibb.co/Y3Hrt9Q/EXPORTAR-REPORTE.jpg">
 
 
 ## Autómata Finito Determinista
 
-- Claves = [" "," "]
+    Claves = [" "," "]
 <image src="https://i.ibb.co/qgwSvc7/CLAVES.png">
 
-- Registros = [{," ",}{," ",}]
+    Registros = [{," ",}{," ",}]
 <image src="https://i.ibb.co/9v3BV3q/REGISTROS.png">
 
-- #Comentario
+    #Comentario
 <image src="https://i.ibb.co/dLNKPtd/COMENTARIO-SIMPLE.png">
 
-- '''Comentario'''
+    '''Comentario'''
 <image src="https://i.ibb.co/fYRdz6q/COMENTARIO-MULTI.png">
 
-- imprimir("");
+    imprimir("");
 <image src="https://i.ibb.co/d4fDjBw/IMPRIMIR.png">
 
-- implimirln("");
+    implimirln("");
 <image src="https://i.ibb.co/3smR9z9/IMPRIMIR-LN.png">
 
-- conteo();
+    conteo();
 <image src="https://i.ibb.co/bmCNsk1/CONTEO.png">
 
-- datos();
+    datos();
 <image src="https://i.ibb.co/HzgpHNk/DATOS.png">
 
-- promedio("");c
+    promedio("");c
 <image src="https://i.ibb.co/SXJYtzf/PROMEDIO.png">
 
-- contarsi("", );
+    contarsi("", );
 <image src="https://i.ibb.co/QvsC1WP/CONTARSI.png">
 
-- sumar("");
+    sumar("");
 <image src="https://i.ibb.co/SQFWSXd/SUMAR.png">
 
-- max("");
+    max("");
 <image src="https://i.ibb.co/wRYbZcb/MAX.png">
 
-- min("");
+    min("");
 <image src="https://i.ibb.co/bRrrT1Q/MIN.png">
 
-- exportarReporte("");
+    exportarReporte("");
 <image src="https://i.ibb.co/CBXThB0/EXPORTAR-REPORTE.png">
 
 
@@ -221,128 +221,128 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 ## Gramática Independiente Del Contexto
 
     Claves = ["",""]
-Terminales = {'Claves', Igual, Corchete Izquierdo, Corchete Derecho, Comillas, Coma, Texto}
-No Terminales = {q0, q1, q2, q3}
-Inicio = {q0}
-Producciones:
-< q0 >::= Claves Igual < q1 >
-< q1 >::= Corchete Izquierdo < q2 > Corchete Derecho
-< q2 >::= Comillas - Texto - Comillas < q3 >
-< q3 >::= Coma < q2 > | e
++ Terminales = {'Claves', Igual, Corchete Izquierdo, Corchete Derecho, Comillas, Coma, Texto}
++ No Terminales = {q0, q1, q2, q3}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= Claves Igual < q1 >
++ < q1 >::= Corchete Izquierdo < q2 > Corchete Derecho
++ < q2 >::= Comillas - Texto - Comillas < q3 >
++ < q3 >::= Coma < q2 > | e
 
 	Registros = [{,"",} {,"",}]
-Terminales = {'Registros', Igual, Corchete Izquierdo, Corchete Derecho, Llave Izquierda, Llave Derecha, Comillas, Coma, Texto}
-No Terminales = {q0, q1, q2, q3, q4}
-Inicio = {q0}
-Producciones:
-< q0 >::= Registros Igual < q1 >
-< q1 >::= Corchete Izquierdo < q2 > Corchete Derecho
-< q2 >::= Llave Izquierda < q3 > Llave Derecha
-< q3 >::= Texto < q4 > | Comillas - Texto - Comillas < q4 >
-< q4 >::= Coma < q3 > | e
++ Terminales = {'Registros', Igual, Corchete Izquierdo, Corchete Derecho, Llave Izquierda, Llave Derecha, Comillas, Coma, Texto}
++ No Terminales = {q0, q1, q2, q3, q4}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= Registros Igual < q1 >
++ < q1 >::= Corchete Izquierdo < q2 > Corchete Derecho
++ < q2 >::= Llave Izquierda < q3 > Llave Derecha
++ < q3 >::= Texto < q4 > | Comillas - Texto - Comillas < q4 >
++ < q4 >::= Coma < q3 > | e
 
 	#Comentario
-Terminales = {Numeral, Texto}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= Numeral < q1 >
-< q1 >::= Texto < q2 > | e
-< q2 >::= Texto < q1 > | e
++ Terminales = {Numeral, Texto}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= Numeral < q1 >
++ < q1 >::= Texto < q2 > | e
++ < q2 >::= Texto < q1 > | e
 
 	'''
-Terminales = {', Texto, '\n'}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= ''' < q1 > '''
-< q1 >::= Texto < q2 > | \n < q2 > | e
-< q2 >::= Texto < q1 > | \n < q2 > | e
++ Terminales = {', Texto, '\n'}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= ''' < q1 > '''
++ < q1 >::= Texto < q2 > | \n < q2 > | e
++ < q2 >::= Texto < q1 > | \n < q2 > | e
 
 	imprimir("");
-Terminales = {'imprimir', Paréntesis Izquierdo, Paréntesis Derecho, Texto, Comillas, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= imprimir < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'imprimir', Paréntesis Izquierdo, Paréntesis Derecho, Texto, Comillas, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= imprimir < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
 
 	implimirln("");
-Terminales = {'imprimirln', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= imprimirln < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'imprimirln', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= imprimirln < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
 	conteo();
-Terminales = {'conteo', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
-No Terminales = {q0, q1}
-Inicio = {q0}
-Producciones:
-< q0 >::= conteo < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo Paréntesis Derecho
++ Terminales = {'conteo', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
++ No Terminales = {q0, q1}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= conteo < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo Paréntesis Derecho
 
 	datos();
-Terminales = {'datos', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
-No Terminales = {q0, q1}
-Inicio = {q0}
-Producciones:
-< q0 >::= datos < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo Paréntesis Derecho
++ Terminales = {'datos', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
++ No Terminales = {q0, q1}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= datos < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo Paréntesis Derecho
 
 	promedio("");
-Terminales = {'promedio', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= promedio < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'promedio', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= promedio < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
 
 	contarsi("", );
-Terminales = {'contarsi', Paréntesis Izquierdo, Paréntesis Derecho, Coma, Carácter, Comilla, Punto Y Coma}
-No Terminales = {q0, q1, q2, q3}
-Inicio = {q0}
-Producciones:
-< q0 >::= contarsi < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas < q3 >
-< q3 >::= Coma Texto | Coma e
++ Terminales = {'contarsi', Paréntesis Izquierdo, Paréntesis Derecho, Coma, Carácter, Comilla, Punto Y Coma}
++ No Terminales = {q0, q1, q2, q3}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= contarsi < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas < q3 >
++ < q3 >::= Coma Texto | Coma e
 
 	sumar("");
-Terminales = {'sumar', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= sumar < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'sumar', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= sumar < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
 
 	max("");
-Terminales = {'max', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= max < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'max', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= max < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
 
 	min("");
-Terminales = {'min', Paréntesis Izquierdo, Paréntesis Derecho, carácter, comilla, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= min < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'min', Paréntesis Izquierdo, Paréntesis Derecho, carácter, comilla, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= min < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
 
 	exportarReporte("");
-Terminales = {'exportarReporte', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
-No Terminales = {q0, q1, q2}
-Inicio = {q0}
-Producciones:
-< q0 >::= exportarReporte < q1 > Punto Y Coma
-< q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
-< q2 >::= Comillas - Texto - Comillas
++ Terminales = {'exportarReporte', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
++ No Terminales = {q0, q1, q2}
++ Inicio = {q0}
++ Producciones:
++ < q0 >::= exportarReporte < q1 > Punto Y Coma
++ < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
++ < q2 >::= Comillas - Texto - Comillas
