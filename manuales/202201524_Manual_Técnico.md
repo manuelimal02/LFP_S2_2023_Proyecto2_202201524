@@ -85,47 +85,46 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 ## Expresiones Regulares
 
 - Claves = [" "," "]
-ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
+    - ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
 - Registros = [{," ",}{," ",}]
-ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
+    - ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
 - #Comentario
-ER: '#' Cr+
+    - ER: '#' Cr+
 
 - '''Comentario'''
-ER: ' ' ' (Cr | \n )+ ' ' '
-Terminales = {',caracter, '\n'}
+    - ER: ' ' ' (Cr | \n )+ ' ' '
 
 - imprimir("");
-ER: imprimir ( " Cr+ " ) ;
+    - ER: imprimir ( " Cr+ " ) ;
 
 - implimirln("");
-ER: imprimirln ( " Cr+ " ) ;
+    - ER: imprimirln ( " Cr+ " ) ;
 
 - conteo();
-ER: conteo (  ) ;
+    - ER: conteo (  ) ;
 
 - datos();
-ER: datos (  ) ;
+    - ER: datos (  ) ;
 
 - promedio("");
-ER: promedio ( " Cr+ " ) ;
+    - ER: promedio ( " Cr+ " ) ;
 
 - contarsi("", );
-ER: contarsi ( " Cr+ " , Cr+ ) ;
+    - ER: contarsi ( " Cr+ " , Cr+ ) ;
 
 - sumar("");
-ER: sumar ( " Cr+ " ) ;
+    - ER: sumar ( " Cr+ " ) ;
 
 - max("");
-ER: max ( " Cr+ " ) ;
+    - ER: max ( " Cr+ " ) ;
 
 - min("");
-ER: min ( " Cr+ " ) ;
+    - ER: min ( " Cr+ " ) ;
 
 - exportarReporte("");
-ER: exportarReporte ( " Cr+ " ) ;
+    - ER: exportarReporte ( " Cr+ " ) ;
 
 
 ## Método Del Árbol
@@ -223,60 +222,60 @@ ER: exportarReporte ( " Cr+ " ) ;
 
 - datos();
 Producciones:
-<q0>::= datos <q1> Punto Y Coma
-<q1>::= Paréntesis Derecho - Paréntesis Izquierdo 
+q0::= datos q1 Punto Y Coma
+q1::= Paréntesis Derecho - Paréntesis Izquierdo 
 
 - promedio("");
 Terminales = {'promedio', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-<q0>::= Promedio <q1> Punto Y Coma
-<q1>::= Paréntesis Izquierdo <q2> Paréntesis Derecho
-<q2>::= Comilla - Texto - Comilla
+q0::= Promedio q1 Punto Y Coma
+q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
+q2::= Comilla - Texto - Comilla
 
 - contarsi("", );
 Terminales = {'contarsi', Paréntesis Izquierdo, Paréntesis Derecho, Coma, Carácter, comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2, q3}
 Inicio = {q0}
 Producciones:
-<q0>::= contarsi <q1> Punto Y Coma
-<q1>::= Paréntesis Izquierdo <q2> Paréntesis Derecho
-<q2>::= Comilla - Texto - Comilla <q3>
-<q3>::= Coma - Texto | Coma e
+q0::= contarsi q1 Punto Y Coma
+q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
+q2::= Comilla - Texto - Comilla q3
+q3::= Coma - Texto | Coma e
 
 - sumar("");
 Terminales = {'sumar', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-<q0>::= sumar <q1> Punto Y Coma
-<q1>::= Paréntesis Izquierdo <q2> Paréntesis Derecho
-<q2>::= Comilla - Texto - Comilla
+q0::= sumar q1 Punto Y Coma
+q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
+q2::= Comilla - Texto - Comilla
 
 - max("");
 Terminales = {'max', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-<q0>::= max <q1> Punto Y Coma
-<q1>::= Paréntesis Izquierdo <q2> Paréntesis Derecho
-<q2>::= Comilla - Texto - Comilla
+q0::= max q1 Punto Y Coma
+q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
+q2::= Comilla - Texto - Comilla
 
 - min("");
 Terminales = {'min', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-<q0>::= min <q1> Punto Y Coma
-<q1>::= Paréntesis Izquierdo <q2> Paréntesis Derecho
-<q2>::= Comilla - Texto - Comilla
+q0::= min q1> Punto Y Coma
+q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
+q2::= Comilla - Texto - Comilla
 
 - exportarReporte("");
 Terminales = {'exportarReporte', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 No Terminales = {q0, q1, q2}
 Inicio = {q0}
 Producciones:
-<q0>::= exportarReporte <q1> Punto Y Coma
-<q1>::= Paréntesis Izquierdo <q2> Paréntesis Derecho
-<q2>::= Comilla - Texto - Comilla
+q0::= exportarReporte q1 Punto Y Coma
+q1::= Paréntesis Izquierdo q2 Paréntesis Derecho
+q2::= Comilla - Texto - Comilla
