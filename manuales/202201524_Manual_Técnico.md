@@ -1,4 +1,4 @@
-## Aplicación Numérica Con Análisis Léxico
+## Business Data Analysis - Análizador Léxico y Sintáctico
 
 ## lexema.py
 
@@ -220,7 +220,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 
 ## Gramática Independiente Del Contexto
 
-    Claves = ["",""]
+**Claves = [" "," "]**
 + Terminales = {'Claves', Igual, Corchete Izquierdo, Corchete Derecho, Comillas, Coma, Texto}
 + No Terminales = {q0, q1, q2, q3}
 + Inicio = {q0}
@@ -230,7 +230,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q2 >::= Comillas - Texto - Comillas < q3 >
 + < q3 >::= Coma < q2 > | e
 
-	Registros = [{,"",} {,"",}]
+**Registros = [{,"",} {,"",}]**
 + Terminales = {'Registros', Igual, Corchete Izquierdo, Corchete Derecho, Llave Izquierda, Llave Derecha, Comillas, Coma, Texto}
 + No Terminales = {q0, q1, q2, q3, q4}
 + Inicio = {q0}
@@ -241,7 +241,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q3 >::= Texto < q4 > | Comillas - Texto - Comillas < q4 >
 + < q4 >::= Coma < q3 > | e
 
-	#Comentario
+**#Comentario**
 + Terminales = {Numeral, Texto}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -250,7 +250,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Texto < q2 > | e
 + < q2 >::= Texto < q1 > | e
 
-	'''
+**'''Comentario'''**
 + Terminales = {', Texto, '\n'}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -259,7 +259,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Texto < q2 > | \n < q2 > | e
 + < q2 >::= Texto < q1 > | \n < q2 > | e
 
-	imprimir("");
+**imprimir("");**
 + Terminales = {'imprimir', Paréntesis Izquierdo, Paréntesis Derecho, Texto, Comillas, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -268,7 +268,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas
 
-	implimirln("");
+**implimirln("");**
 + Terminales = {'imprimirln', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -276,7 +276,8 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q0 >::= imprimirln < q1 > Punto Y Coma
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas
-	conteo();
+
+**conteo();**
 + Terminales = {'conteo', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
 + No Terminales = {q0, q1}
 + Inicio = {q0}
@@ -284,7 +285,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q0 >::= conteo < q1 > Punto Y Coma
 + < q1 >::= Paréntesis Izquierdo Paréntesis Derecho
 
-	datos();
+**datos();**
 + Terminales = {'datos', Paréntesis Izquierdo, Paréntesis Derecho, Punto Y Coma}
 + No Terminales = {q0, q1}
 + Inicio = {q0}
@@ -292,7 +293,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q0 >::= datos < q1 > Punto Y Coma
 + < q1 >::= Paréntesis Izquierdo Paréntesis Derecho
 
-	promedio("");
+**promedio("");**
 + Terminales = {'promedio', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -301,7 +302,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas
 
-	contarsi("", );
+**contarsi("", );**
 + Terminales = {'contarsi', Paréntesis Izquierdo, Paréntesis Derecho, Coma, Carácter, Comilla, Punto Y Coma}
 + No Terminales = {q0, q1, q2, q3}
 + Inicio = {q0}
@@ -311,7 +312,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q2 >::= Comillas - Texto - Comillas < q3 >
 + < q3 >::= Coma Texto | Coma e
 
-	sumar("");
+**sumar("");**
 + Terminales = {'sumar', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -320,7 +321,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas
 
-	max("");
+**max("");**
 + Terminales = {'max', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comilla, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -329,7 +330,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas
 
-	min("");
+**min("");**
 + Terminales = {'min', Paréntesis Izquierdo, Paréntesis Derecho, carácter, comilla, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
@@ -338,7 +339,7 @@ ER: exportarReporte ( " Cr+ " ) ;
 + < q1 >::= Paréntesis Izquierdo < q2 > Paréntesis Derecho
 + < q2 >::= Comillas - Texto - Comillas
 
-	exportarReporte("");
+**exportarReporte("");**
 + Terminales = {'exportarReporte', Paréntesis Izquierdo, Paréntesis Derecho, Carácter, Comillas, Punto Y Coma}
 + No Terminales = {q0, q1, q2}
 + Inicio = {q0}
