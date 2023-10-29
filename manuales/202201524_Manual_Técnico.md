@@ -93,46 +93,46 @@ El código se trata de una implementación de un analizador sintáctico diseñad
 ## Expresiones Regulares
 
 **Claves = [" "," "]**
-    ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
++ ER: Claves = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
 **Registros = [{," ",}{," ",}]**
-    ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
++ ER: Registros = [ ({ ((Cr+)|(" Cr +") , )+ })+ ]
 
 **#Comentario**
-    ER: '#' Cr+
++ ER: '#' Cr+
 
 **'''Comentario'''**
-    ER: ' ' ' (Cr | \n )+ ' ' '
++ ER: ' ' ' (Cr | \n )+ ' ' '
 
 **imprimir("");**
-    ER: imprimir ( " Cr+ " ) ;
++ ER: imprimir ( " Cr+ " ) ;
 
 **implimirln("");**
-    ER: imprimirln ( " Cr+ " ) ;
++ ER: imprimirln ( " Cr+ " ) ;
 
 **conteo();**
-    ER: conteo (  ) ;
++ ER: conteo (  ) ;
 
 **datos();**
-    ER: datos (  ) ;
++ ER: datos (  ) ;
 
 **promedio("");**
-    ER: promedio ( " Cr+ " ) ;
++ ER: promedio ( " Cr+ " ) ;
 
 **contarsi("", );**
-    ER: contarsi ( " Cr+ " , Cr+ ) ;
++ ER: contarsi ( " Cr+ " , Cr+ ) ;
 
 **sumar("");**
-    ER: sumar ( " Cr+ " ) ;
++ ER: sumar ( " Cr+ " ) ;
 
 **max("");**
-    ER: max ( " Cr+ " ) ;
++ ER: max ( " Cr+ " ) ;
 
 **min("");**
-    ER: min ( " Cr+ " ) ;
++ ER: min ( " Cr+ " ) ;
 
 **exportarReporte("");**
-    ER: exportarReporte ( " Cr+ " ) ;
++ ER: exportarReporte ( " Cr+ " ) ;
 
 
 
